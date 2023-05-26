@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>국가맞추는게임</title>
+    <style>
+        #wrapper {
+            width: 700px;
+            height: 600px;
+            background: black;
+            margin: auto;
+        }
+
+        #content {
+            width: 100%;
+            height: 400px;
+            background: skyblue;
+            text-align: center;
+            position: relative;
+            /*자식인 국기 이미지가 포지션을 명시했으므로*/
+        }
+
+        #pic {
+            width: 100%;
+            height: 300px;
+
+        }
+
+        #info {
+            width: 100%;
+            height: 100px;
+            background: beige;
+            text-align: center;
+            font-size: 35px;
+            font-weight: bold;
+        }
+
+        /*
+        #info{
+            width: 100px;
+            height: 100px;
+            background: lavender;
+
+        }
+        */
+
+        #footer {
+            width: 100%;
+            height: 100px;
+            background: lightgray;
+            text-align: center;
+        }
+
+        #footer input {
+            width: 300px;
+            height: 50px;
+            font-size: 20px;
+        }
+
+        #footer button {
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+    <script>
+        //공통 요소들의 전역변수화
+        let content;
+        let footer;
+        let img;
+        let textbox;
+        let pic;
+        let info;
+
+        //국가별 배열
+        let korea=["korea.png", "서울 / BTS"];
+        let italy=["italy.png", "로마 / 파스타"];
+        let arjentina=["arjentina.png", "부에노스 아이레스 / 메시"];
+        let sweden=["sweden.png", "스톡홀름 / 이케아"];
+        let ireland=["ireland.png", "더블린 / 켈트"];
+        let taiwan=["taiwan.png", "타이베이 / 버블티"];
+        let chile=["chile.png", "산티아고 / "];
+        let finland=["finland.png", "헬싱키 / 자일리톨"];
+        let morocco=["morocco.png", "라바트 / "];
+        let turkiye=["turkiye.png", "앙카라 / "];
+
+        //위에꺼 담을거임, 2차원배열 큰 박스
+        //각 나라별 이미지 nation[i][0]
+        //각 나라별 수도 nation[i][1]
+        //각 나라별 연관 nation[i][2]
+        let nation=[];
+        nation.push(korea);
+        nation.push(italy);
+        nation.push(arjentina);
+        nation.push(sweden);
+        nation.push(ireland);
+        nation.push(taiwan);
+        nation.push(chile);
+        nation.push(finland);
+        nation.push(morocco);
+        nation.push(turkiye);
+
+        //국가 이름에 대한 배열 ?? 이 있어야되나 ????
+        //et nationName=["대한민국", "이탈리아", ];
+
+        //이미지의 경로를 배열에 담기
+        let imgNames = ["korea.png", "italy.png", "arjentina.png", "sweden.png", "ireland.png", "taiwan.png", "chile.png", "finland.png", "morocco.png", "turkiye.png"];
+        //이미지 자체에 대한 배열
+        let imgList = new Array(imgNames.length);
+        //이미지 출력 인덱스 초기값
+        let index = 0;
+
+        //국가 정보에 대한 배열
+        let nationInfo = ["수도: 서울 / BTS",
+            "수도: 로마 / 파스타",
+            "수도: 부에노스 아이레스 / 메시",
+            "수도: 스톡홀름 / 이케아",
+            "수도: 더블린 / 켈트",
+            "수도:  타이베이 / 버블티",
+            "수도: 산티아고 / ",
+            "수도: 헬싱키 / 자일리톨",
+            "수도: 라바트 / ",
+            "수도: 앙카라 / "];
+
+
+        function next() {
+            pic.src="../images"+imgNames[0];
+
+        }
+        /*
+        //이미지를 생성해서 content에 붙이는 함수
+        function createImg() {
+
+            for (let i = 0; i < imgList.length; i++) {
+                img = document.createElement("img");
+                img.src = "../images/" + imgNames[i];
+                img.style.width = 500 + "px";
+                img.style.height = 300 + "px";
+                img.style.position = "absolute"; //content를 부모로 한다
+                img.style.top = 50 + "px";
+                img.style.left = 100 + "px";
+
+                //생성된 이미지를 content에 부착
+                content.appendChild(img);
+
+                //생성된 이미지를 imgList에 넣기
+                imgList[i] = img;
+            }
+
+        }
+        */
+
+        /*
+        //국가에 대한 정보를 content에 붙이는 함수
+        function createInfo() {
+            info = document.createElement("div");
+            info.innerText = "수도: 로마 / 연관어: 파스타"
+            info.style.background = "lavender"
+            info.style.width = 400 + "px";
+            info.style.height = 50 + "px";
+            img.style.position="absolute"; //content를 부모로 한다
+            //info.style.left=100+"px";
+            info.style.top=300+"px";
+
+            content.appendChild(info);
+
+        }
+        */
+
+
+
+        //국기 이미지를 전환하는 함수
+        function move() {
+
+            //텍스트박스에 입력한 나라가 맞다면 1.다음 국기 사진과 2.다음 국가 정보로
+            //if(textbox.value==)
+            
+                pic.src = "../images/" + nation[index][0];
+
+                info.innerText = nation[index][1], nation[index][2];
+
+                index++;
+
+                if (index > nation.length) { //배열의 길이를 넘어서면
+                    alert("끝 뿅");
+                    //clearTimeout(st);
+
+                    content.innerText = "";
+                    info.innerText = "THE END";
+                }
+            
+        }
+
+        //초기화 함수
+        function init() {
+            content = document.getElementById("content");
+            info = document.getElementById("info");
+            footer = document.getElementById("footer");
+            textbox = document.getElementById("textbox");
+            pic=document.getElementById("pic");
+
+        }
+
+        //문서가 로드되면
+        addEventListener("load", function () {
+            init();
+            move();
+
+        });
+
+            /*
+            img.src = "../images/Play-Now-Button.png";
+            img.addEventListener("click", function () {
+                move();
+            });
+            */
+
+
+            //content.innerText="";
+            //info.innerText="";
+
+    </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div id="content">
+            <img id="pic">
+        </div>
+        <div id="info"></div>
+        <div id="footer">
+            <input id=textbox type="text" placeholder="나라 이름을 맞춰봐라">
+            <button onClick="move()">입력</button>
+        </div>
+    </div>
+</body>
+
+</html>
