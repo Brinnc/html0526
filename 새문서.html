@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원관리폼연습연습</title>
+</head>
+<style>
+    #wrapper {
+        width: 750px;
+        height: 600px;
+        background: black;
+        margin: auto;
+    }
+
+    #header {
+        width: 100%;
+        height: 50px;
+        background: gray;
+    }
+
+    #side {
+        width: 150px;
+        height: 550px;
+        background: lightgray;
+        float: left;
+        text-align: center;
+    }
+
+    #side input,
+    button {
+        width: 80%;
+        /*border: 2px solid darkgrey;*/
+        margin-top: 10px;
+    }
+
+    #content {
+        width: 600px;
+        height: 550px;
+        background: beige;
+        float: left;
+        text-align: center;
+    }
+</style>
+<script>
+    //전역변수화 작업
+    let id; //유저가 입력한 id
+    let pass; //유저가 입력한 비번
+    let name; //유저가 입력한 이름
+
+    let content;
+    
+    let tag; //content div 안에 출력될 태그를 담아놓을 전역변수
+
+    //회원 정보를 출력할 테이블을 생성하는 함수
+    function createTable(){
+        tag="<table>";
+        tag+="<>";
+        tag+="</table>";
+    } 
+
+    //초기화 함수
+    function init(){
+        content=document.getElementById("content");
+        id=document.getElementById("id");
+        pass=document.getElementById("pass");
+        name=document.getElementById("name");
+
+    }
+
+    //문서가 로드되면
+    addEventListener("load", function(){
+        init();
+    });
+</script>
+
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <select id="sel">
+                <option value="id">ID</option>
+                <option value="password">Password</option>
+                <option value="name">Name</option>
+            </select>
+            <input type="text" placeholder="검색어를 입력해">
+        </div>
+        <div id="side">
+            <!--
+                form태그?
+                입력양식의 범위를 설정하는 태그, 데이터의 전송을 목적으로 함
+                1) 폼태그 범위에 있는 모든 UI관련 컴포넌트는 서버로 전송할 수 있다
+                2) 폼태그를 이용하면 요소들간의 접근방법으로서, 요소의 부모자식간 포함관계로 접근이 가능
+
+                *name을 지정해줘야 데이터의 전송과 접근이 가능함
+                  ex) window.document.form1.id //getElement~도 가능
+            -->
+            <form name="form1">
+                <input type="text" name="id" placeholder="ID">
+                <input type="text" name="pass" placeholder="Password">
+                <input type="text" name="name" placeholder="Name">
+            </form>
+            <button onClick="regist()">등록</button>
+        </div>
+        <div id="content">
+
+        </div>
+    </div>
+</body>
+
+</html>
