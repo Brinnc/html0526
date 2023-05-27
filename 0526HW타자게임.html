@@ -254,11 +254,11 @@
         //HW)
         //배경 세팅하는 함수
         function setBg() {
-            bg.src = bgArray[0];
+            bg.src = bgArray[0]; //배경 초기값
             bg.style.width = 600 + "px";
             bg.style.height = 550 + "px";
 
-            if (stage != 0) { //배경 초기값
+            if (stage != 0) { 
                 bg.src = bgArray[stage];
             }
         }
